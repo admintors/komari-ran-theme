@@ -19,8 +19,8 @@ import { filterWindowsByRetention, getRecordRetentionHours } from '@/utils/reten
 import { contentFs } from '@/utils/fontScale'
 import { hashFor } from '@/router/route'
 import { useMobileDrawer } from '@/hooks/useMediaQuery'
+import { type Theme } from '@/components/atoms/ThemePicker'
 
-type Theme = 'ran-night' | 'ran-mist' | 'ran-ember' | 'ran-sakura' | 'ran-lavender'
 type Conn = 'connecting' | 'open' | 'closed' | 'error' | 'idle'
 type SortBy = 'total' | 'tx' | 'rx' | 'live'
 type TimeKey = '1h' | '6h' | '24h' | '7d'

@@ -32,8 +32,8 @@ import { parseMetricsDisplay, resolveMetricsForm } from '@/utils/metricsDisplay'
 import { useNodeHistory } from '@/hooks/useNodeHistory'
 import { hashFor } from '@/router/route'
 import { useMobileDrawer, useIsMobile } from '@/hooks/useMediaQuery'
+import { type Theme } from '@/components/atoms/ThemePicker'
 
-type Theme = 'ran-night' | 'ran-mist' | 'ran-ember' | 'ran-sakura' | 'ran-lavender'
 type Conn = 'connecting' | 'open' | 'closed' | 'error' | 'idle'
 type WindowKey = string
 

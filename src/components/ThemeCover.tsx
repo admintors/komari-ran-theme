@@ -1,8 +1,9 @@
 import type { CSSProperties } from 'react'
+import { type Theme } from '@/components/atoms/ThemePicker'
 
 interface Props {
   /** When set, applies the data-theme directly to this card. */
-  theme?: 'ran-night' | 'ran-mist' | 'ran-ember' | 'ran-sakura' | 'ran-lavender'
+  theme?: Theme
   width?: number
   height?: number
 }

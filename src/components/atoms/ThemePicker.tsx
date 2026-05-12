@@ -1,6 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
 
-export type Theme = 'ran-night' | 'ran-mist' | 'ran-ember' | 'ran-sakura' | 'ran-lavender'
+export type Theme =
+  | 'ran-night'
+  | 'ran-mist'
+  | 'ran-ember'
+  | 'ran-sakura'
+  | 'ran-lavender'
+  | 'ran-tomcat'
+  | 'ran-teal'
+  | 'ran-midnight'
+  | 'ran-mint'
+  | 'ran-butter'
 
 interface Props {
   value: Theme
@@ -55,6 +65,36 @@ const THEMES: ThemeOption[] = [
     name: 'LAVENDER',
     zh: '薰',
     swatch: { bg: '#e4dceb', card: '#ede7f3', accent: '#7048a4' },
+  },
+  {
+    value: 'ran-tomcat',
+    name: 'TOMCAT',
+    zh: '凶鸟',
+    swatch: { bg: '#2a3848', card: '#3a4d5e', accent: '#e8a458' },
+  },
+  {
+    value: 'ran-teal',
+    name: 'TEAL',
+    zh: '松石',
+    swatch: { bg: '#1f3537', card: '#2a4548', accent: '#e8a458' },
+  },
+  {
+    value: 'ran-midnight',
+    name: 'MIDNIGHT',
+    zh: '午夜',
+    swatch: { bg: '#0c1422', card: '#162038', accent: '#e0a55a' },
+  },
+  {
+    value: 'ran-mint',
+    name: 'MINT',
+    zh: '薄荷',
+    swatch: { bg: '#dceee5', card: '#e8f4ef', accent: '#2e8870' },
+  },
+  {
+    value: 'ran-butter',
+    name: 'BUTTER',
+    zh: '奶油',
+    swatch: { bg: '#f6ecc8', card: '#faf2dc', accent: '#c4881c' },
   },
 ]
 

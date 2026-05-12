@@ -25,8 +25,8 @@ import {
   type ParsedBilling,
 } from '@/utils/billing'
 import { contentFs } from '@/utils/fontScale'
+import { type Theme } from '@/components/atoms/ThemePicker'
 
-type Theme = 'ran-night' | 'ran-mist' | 'ran-ember' | 'ran-sakura' | 'ran-lavender'
 type Conn = 'connecting' | 'open' | 'closed' | 'error' | 'idle'
 type DisplayCode = 'USD' | 'CNY' | 'EUR' | 'GBP' | 'NATIVE'
 

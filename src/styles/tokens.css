@@ -562,6 +562,241 @@ body {
   }
 }
 
+/* ── ran-tomcat (steel blue-grey) ─────────────────────────── */
+[data-theme='ran-tomcat'] {
+  --bg-0: #2a3848;
+  --bg-1: #324252;
+  --bg-2: #3a4d5e;
+  --bg-3: #46596c;
+  --bg-4: #526677;
+  --bg-inset: #1e2e3c;
+
+  --fg-0: #e8eef4;
+  --fg-1: #bcc8d4;
+  --fg-2: #869aae;
+  --fg-3: #5e7286;
+  --fg-mark: #ffffff;
+
+  --txt-engrave: 0 1px 1px rgba(0, 0, 0, 0.5);
+
+  --edge-bright: rgba(210, 224, 238, 0.10);
+  --edge-mid: rgba(210, 224, 238, 0.05);
+  --edge-deep: rgba(0, 0, 0, 0.50);
+  --edge-engrave: rgba(0, 0, 0, 0.38);
+
+  --accent: #e8a458;
+  --accent-dim: #c4823a;
+  --accent-bright: #f0bc78;
+
+  --signal-good: #88b8a8;
+  --signal-warn: #d4a840;
+  --signal-bad: #d86050;
+  --signal-info: #6a9fd0;
+
+  --shadow-card:
+    0 1px 0 var(--edge-bright) inset,
+    0 -1px 0 var(--edge-deep) inset,
+    0 1px 3px rgba(0, 0, 0, 0.25);
+  --shadow-inset:
+    inset 0 1px 0 var(--edge-deep),
+    inset 0 -1px 0 var(--edge-bright),
+    inset 0 1px 3px rgba(0, 0, 0, 0.30);
+  --shadow-button:
+    0 1px 0 var(--edge-bright) inset,
+    0 -1px 0 var(--edge-deep) inset;
+
+  --grid-line: rgba(210, 224, 238, 0.06);
+  --grid-line-strong: rgba(210, 224, 238, 0.12);
+}
+
+/* ── ran-teal (deep teal) ─────────────────────────────────── */
+[data-theme='ran-teal'] {
+  --bg-0: #1f3537;
+  --bg-1: #243d3f;
+  --bg-2: #2a4548;
+  --bg-3: #324f53;
+  --bg-4: #3a5a5e;
+  --bg-inset: #162a2c;
+
+  --fg-0: #e8f0ee;
+  --fg-1: #bcc8c5;
+  --fg-2: #82938f;
+  --fg-3: #5a6b67;
+  --fg-mark: #ffffff;
+
+  --txt-engrave: 0 1px 1px rgba(0, 0, 0, 0.5);
+
+  --edge-bright: rgba(220, 240, 234, 0.10);
+  --edge-mid: rgba(220, 240, 234, 0.05);
+  --edge-deep: rgba(0, 0, 0, 0.52);
+  --edge-engrave: rgba(0, 0, 0, 0.42);
+
+  --accent: #e8a458;
+  --accent-dim: #c4823a;
+  --accent-bright: #f0bc78;
+
+  --signal-good: #7ec0a0;
+  --signal-warn: #d4a840;
+  --signal-bad: #d86050;
+  --signal-info: #5a9ec0;
+
+  --shadow-card:
+    0 1px 0 var(--edge-bright) inset,
+    0 -1px 0 var(--edge-deep) inset,
+    0 1px 3px rgba(0, 0, 0, 0.28);
+  --shadow-inset:
+    inset 0 1px 0 var(--edge-deep),
+    inset 0 -1px 0 var(--edge-bright),
+    inset 0 1px 3px rgba(0, 0, 0, 0.32);
+  --shadow-button:
+    0 1px 0 var(--edge-bright) inset,
+    0 -1px 0 var(--edge-deep) inset;
+
+  --grid-line: rgba(220, 240, 234, 0.06);
+  --grid-line-strong: rgba(220, 240, 234, 0.12);
+}
+
+/* ── ran-midnight (deep navy) ─────────────────────────────── */
+[data-theme='ran-midnight'] {
+  --bg-0: #0c1422;
+  --bg-1: #101a2c;
+  --bg-2: #162038;
+  --bg-3: #1c2844;
+  --bg-4: #243050;
+  --bg-inset: #080e18;
+
+  --fg-0: #e8eef8;
+  --fg-1: #bcc8dc;
+  --fg-2: #7a8aa8;
+  --fg-3: #4e5c78;
+  --fg-mark: #ffffff;
+
+  --txt-engrave: 0 1px 1px rgba(0, 0, 0, 0.6);
+
+  --edge-bright: rgba(200, 220, 255, 0.10);
+  --edge-mid: rgba(200, 220, 255, 0.05);
+  --edge-deep: rgba(0, 0, 0, 0.62);
+  --edge-engrave: rgba(0, 0, 0, 0.50);
+
+  --accent: #e0a55a;
+  --accent-dim: #bc8438;
+  --accent-bright: #f0be78;
+
+  --signal-good: #5ab088;
+  --signal-warn: #d4a840;
+  --signal-bad: #d86050;
+  --signal-info: #5a8ec8;
+
+  --shadow-card:
+    0 1px 0 var(--edge-bright) inset,
+    0 -1px 0 var(--edge-deep) inset,
+    0 1px 3px rgba(0, 0, 0, 0.35);
+  --shadow-inset:
+    inset 0 1px 0 var(--edge-deep),
+    inset 0 -1px 0 var(--edge-bright),
+    inset 0 1px 3px rgba(0, 0, 0, 0.40);
+  --shadow-button:
+    0 1px 0 var(--edge-bright) inset,
+    0 -1px 0 var(--edge-deep) inset;
+
+  --grid-line: rgba(200, 220, 255, 0.06);
+  --grid-line-strong: rgba(200, 220, 255, 0.12);
+}
+
+/* ── ran-mint (pale mint) ─────────────────────────────────── */
+[data-theme='ran-mint'] {
+  --bg-0: #dceee5;
+  --bg-1: #e2f1ea;
+  --bg-2: #e8f4ef;
+  --bg-3: #eef7f3;
+  --bg-4: #f4faf7;
+  --bg-inset: #cce6da;
+
+  --fg-0: #0e2a22;
+  --fg-1: #1c4438;
+  --fg-2: #4e766a;
+  --fg-3: #82a294;
+  --fg-mark: #000000;
+
+  --txt-engrave: 0 1px 1px rgba(255, 255, 255, 0.65);
+
+  --edge-bright: rgba(255, 255, 255, 0.75);
+  --edge-mid: rgba(255, 255, 255, 0.4);
+  --edge-deep: rgba(20, 70, 55, 0.22);
+  --edge-engrave: rgba(20, 70, 55, 0.14);
+
+  --accent: #2e8870;
+  --accent-dim: #1e6858;
+  --accent-bright: #3aa888;
+
+  --signal-good: #3a9060;
+  --signal-warn: #a07018;
+  --signal-bad: #c03828;
+  --signal-info: #2a6898;
+
+  --shadow-card:
+    0 1px 0 var(--edge-bright) inset,
+    0 -1px 0 var(--edge-deep) inset,
+    0 1px 3px rgba(20, 70, 55, 0.08);
+  --shadow-inset:
+    inset 0 1px 0 var(--edge-deep),
+    inset 0 -1px 0 var(--edge-bright),
+    inset 0 1px 3px rgba(20, 70, 55, 0.12);
+  --shadow-button:
+    0 1px 0 var(--edge-bright) inset,
+    0 -1px 0 var(--edge-deep) inset;
+
+  --grid-line: rgba(20, 70, 55, 0.07);
+  --grid-line-strong: rgba(20, 70, 55, 0.14);
+}
+
+/* ── ran-butter (warm cream) ──────────────────────────────── */
+[data-theme='ran-butter'] {
+  --bg-0: #f6ecc8;
+  --bg-1: #f8efd2;
+  --bg-2: #faf2dc;
+  --bg-3: #fcf6e6;
+  --bg-4: #fefaf2;
+  --bg-inset: #ede0b0;
+
+  --fg-0: #3a2c0c;
+  --fg-1: #5e4818;
+  --fg-2: #8e7438;
+  --fg-3: #b5a06c;
+  --fg-mark: #000000;
+
+  --txt-engrave: 0 1px 1px rgba(255, 255, 255, 0.65);
+
+  --edge-bright: rgba(255, 255, 255, 0.75);
+  --edge-mid: rgba(255, 255, 255, 0.4);
+  --edge-deep: rgba(80, 55, 10, 0.22);
+  --edge-engrave: rgba(80, 55, 10, 0.14);
+
+  --accent: #c4881c;
+  --accent-dim: #a06a10;
+  --accent-bright: #dea030;
+
+  --signal-good: #7a9c40;
+  --signal-warn: #c07818;
+  --signal-bad: #c03828;
+  --signal-info: #2a6898;
+
+  --shadow-card:
+    0 1px 0 var(--edge-bright) inset,
+    0 -1px 0 var(--edge-deep) inset,
+    0 1px 3px rgba(80, 55, 10, 0.08);
+  --shadow-inset:
+    inset 0 1px 0 var(--edge-deep),
+    inset 0 -1px 0 var(--edge-bright),
+    inset 0 1px 3px rgba(80, 55, 10, 0.12);
+  --shadow-button:
+    0 1px 0 var(--edge-bright) inset,
+    0 -1px 0 var(--edge-deep) inset;
+
+  --grid-line: rgba(80, 55, 10, 0.07);
+  --grid-line-strong: rgba(80, 55, 10, 0.14);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

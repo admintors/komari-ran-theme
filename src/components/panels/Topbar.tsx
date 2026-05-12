@@ -8,8 +8,8 @@ import { useIsMobile, useIsNarrow } from '@/hooks/useMediaQuery'
 import { useSearchQuery, nodeMatchesQuery } from '@/hooks/useSearchQuery'
 import { contentFs } from '@/utils/fontScale'
 import type { KomariNode, KomariRecord } from '@/types/komari'
+import { type Theme } from '@/components/atoms/ThemePicker'
 
-type Theme = 'ran-night' | 'ran-mist' | 'ran-ember' | 'ran-sakura' | 'ran-lavender'
 type Conn = 'connecting' | 'open' | 'closed' | 'error' | 'idle'
 
 interface Props {

@@ -10,18 +10,17 @@ import { useKomari } from '@/hooks/useKomari'
 import { useGlobalHistory } from '@/hooks/useGlobalHistory'
 import { MOCK_NODES, MOCK_RECORDS } from '@/data/mock'
 import { ThemeCover } from '@/components/ThemeCover'
+import { type Theme } from '@/components/atoms/ThemePicker'
 import { useRoute } from '@/router/route'
 import { applyFontScale, parseFontScale } from '@/utils/fontScale'
 import { applyUiScale, parseUiScale } from '@/utils/uiScale'
 import { setBpsUnitMode, parseBpsUnitMode } from '@/utils/format'
 
-type Theme = 'ran-night' | 'ran-mist' | 'ran-ember' | 'ran-sakura' | 'ran-lavender'
-
 const THEME_KEY = 'ran.theme'
 /** Set to '1' when the user has explicitly picked a theme via the ThemePicker. */
 const THEME_USER_SET_KEY = 'ran.theme.user'
 
-const VALID_THEMES: Theme[] = ['ran-night', 'ran-mist', 'ran-ember', 'ran-sakura', 'ran-lavender']
+const VALID_THEMES: Theme[] = ['ran-night', 'ran-mist', 'ran-ember', 'ran-sakura', 'ran-lavender', 'ran-tomcat', 'ran-teal', 'ran-midnight', 'ran-mint', 'ran-butter']
 
 function isValidTheme(v: unknown): v is Theme {
   return VALID_THEMES.includes(v as Theme)

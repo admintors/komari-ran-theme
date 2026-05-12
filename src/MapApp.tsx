@@ -29,8 +29,8 @@ import { regionToISO } from '@/utils/region'
 import { nodeToCityLabel } from '@/utils/cities'
 import { applyFontScale, parseFontScale } from '@/utils/fontScale'
 import { setBpsUnitMode, parseBpsUnitMode } from '@/utils/format'
+import { type Theme } from '@/components/atoms/ThemePicker'
 
-type Theme = 'ran-night' | 'ran-mist' | 'ran-ember' | 'ran-sakura' | 'ran-lavender'
 
 const THEME_KEY = 'ran.theme'
 
