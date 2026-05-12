@@ -12,6 +12,7 @@ import { MOCK_NODES, MOCK_RECORDS } from '@/data/mock'
 import { ThemeCover } from '@/components/ThemeCover'
 import { useRoute } from '@/router/route'
 import { applyFontScale, parseFontScale } from '@/utils/fontScale'
+import { applyUiScale, parseUiScale } from '@/utils/uiScale'
 import { setBpsUnitMode, parseBpsUnitMode } from '@/utils/format'
 
 type Theme = 'ran-night' | 'ran-mist' | 'ran-ember' | 'ran-sakura' | 'ran-lavender'
@@ -90,6 +91,12 @@ export default function App() {
     const raw = config?.theme_settings?.font_scale
     applyFontScale(parseFontScale(raw))
   }, [config?.theme_settings?.font_scale])
+
+  // 整体 UI 缩放 — 跟随 theme_settings.ui_scale,用 CSS zoom 整体放大。
+  useEffect(() => {
+    const raw = config?.theme_settings?.ui_scale
+    applyUiScale(parseUiScale(raw))
+  }, [config?.theme_settings?.ui_scale])
 
   // 流量单位策略 — 跟随 theme_settings.bps_unit。
   // formatBps / compactBps 内部读取模块状态;改完触发组件 re-render

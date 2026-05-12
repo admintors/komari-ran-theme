@@ -31,6 +31,14 @@
         "help": "调整页面内容文字大小。standard = 标准(默认),large = 大(约 +18%),xlarge = 超大(约 +36%)。仅缩放数字和正文,不改变布局尺寸。"
       },
       {
+        "key": "ui_scale",
+        "name": "[ ZOOM ] 整体 UI 缩放",
+        "type": "select",
+        "options": "normal,larger,large,xlarge",
+        "default": "normal",
+        "help": "整体放大页面 UI,字体、间距、卡片尺寸全部同步缩放。normal = 默认,larger = 较大(×1.1),large = 大(×1.25),xlarge = 极大(×1.5)。"
+      },
+      {
         "key": "visitor_alert",
         "name": "[ HUD ] 访客信息浮卡",
         "type": "select",
