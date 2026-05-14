@@ -5,12 +5,16 @@ import { NodeDetailPage } from '@/pages/NodeDetail'
 import { TrafficPage } from '@/pages/Traffic'
 import { BillingPage } from '@/pages/Billing'
 import { HubPage } from '@/pages/Hub'
+import { V2DemoPage } from '@/pages/V2Demo'
+import { OverviewV2Page } from '@/pages/OverviewV2'
+import { NodesV2Page } from '@/pages/NodesV2'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { useKomari } from '@/hooks/useKomari'
 import { useGlobalHistory } from '@/hooks/useGlobalHistory'
 import { MOCK_NODES, MOCK_RECORDS } from '@/data/mock'
 import { ThemeCover } from '@/components/ThemeCover'
 import { type Theme } from '@/components/atoms/ThemePicker'
+import { useViewVersion } from '@/components/atoms/ViewVersionSwitcher'
 import { useRoute } from '@/router/route'
 import { applyFontScale, parseFontScale } from '@/utils/fontScale'
 import { applyUiScale, parseUiScale } from '@/utils/uiScale'
@@ -65,6 +69,14 @@ export default function App() {
   }
   const route = useRoute()
   const { nodes, records, config, conn, ping, lastUpdate } = useKomari()
+
+  // View version (v1 classic vs v2 modern). Reads:
+  //   1. user's localStorage preference (highest)
+  //   2. config.theme_settings.default_view (admin's choice)
+  //   3. 'v2' (built-in fallback)
+  const [viewVersion, setViewVersion] = useViewVersion(
+    config?.theme_settings?.default_view,
+  )
 
   useEffect(() => {
     document.body.setAttribute('data-theme', theme)
@@ -198,6 +210,27 @@ export default function App() {
           />
         )
       }
+      // v1 / v2 split — preference picked by useViewVersion (user / admin / default)
+      if (viewVersion === 'v2') {
+        return (
+          <ErrorBoundary scope="nodes-v2">
+            <NodesV2Page
+              nodes={displayNodes}
+              records={displayRecords}
+              theme={theme}
+              onTheme={handleThemeChange}
+              siteName={siteName}
+              lastUpdate={lastUpdate}
+              conn={conn}
+              ping={ping}
+              config={config}
+              hubTargetUuid={hubTargetUuid}
+              viewVersion={viewVersion}
+              onViewVersionChange={setViewVersion}
+            />
+          </ErrorBoundary>
+        )
+      }
       return (
         <NodesPage
           nodes={displayNodes}
@@ -210,6 +243,8 @@ export default function App() {
           history={globalHistory}
           config={config}
           hubTargetUuid={hubTargetUuid}
+          viewVersion={viewVersion}
+          onViewVersionChange={setViewVersion}
         />
       )
 
@@ -254,8 +289,65 @@ export default function App() {
         />
       )
 
-    case 'overview':
-    default:
+    case 'v2':
+      return (
+        <ErrorBoundary scope="v2-demo">
+          <V2DemoPage
+            nodes={displayNodes}
+            records={displayRecords}
+            theme={theme}
+            onTheme={handleThemeChange}
+            siteName={siteName}
+            lastUpdate={lastUpdate}
+            conn={conn}
+            ping={ping}
+            config={config}
+            hubTargetUuid={hubTargetUuid}
+          />
+        </ErrorBoundary>
+      )
+
+    case 'v2-overview':
+      return (
+        <ErrorBoundary scope="v2-overview">
+          <OverviewV2Page
+            nodes={displayNodes}
+            records={displayRecords}
+            theme={theme}
+            onTheme={handleThemeChange}
+            siteName={siteName}
+            lastUpdate={lastUpdate}
+            conn={conn}
+            ping={ping}
+            config={config}
+            hubTargetUuid={hubTargetUuid}
+            viewVersion="v2"
+            onViewVersionChange={setViewVersion}
+          />
+        </ErrorBoundary>
+      )
+
+    case 'v2-nodes':
+      return (
+        <ErrorBoundary scope="v2-nodes">
+          <NodesV2Page
+            nodes={displayNodes}
+            records={displayRecords}
+            theme={theme}
+            onTheme={handleThemeChange}
+            siteName={siteName}
+            lastUpdate={lastUpdate}
+            conn={conn}
+            ping={ping}
+            config={config}
+            hubTargetUuid={hubTargetUuid}
+            viewVersion="v2"
+            onViewVersionChange={setViewVersion}
+          />
+        </ErrorBoundary>
+      )
+
+    case 'v1-overview':
       return (
         <OverviewPage
           nodes={displayNodes}
@@ -269,11 +361,91 @@ export default function App() {
           history={globalHistory}
           config={config}
           hubTargetUuid={hubTargetUuid}
+          viewVersion="v1"
+          onViewVersionChange={setViewVersion}
+        />
+      )
+
+    case 'v1-nodes':
+      return (
+        <NodesPage
+          nodes={displayNodes}
+          records={displayRecords}
+          theme={theme}
+          onTheme={handleThemeChange}
+          siteName={siteName}
+          lastUpdate={lastUpdate}
+          conn={conn}
+          history={globalHistory}
+          config={config}
+          hubTargetUuid={hubTargetUuid}
+          viewVersion="v1"
+          onViewVersionChange={setViewVersion}
+        />
+      )
+
+    case 'overview':
+    default:
+      if (viewVersion === 'v2') {
+        return (
+          <ErrorBoundary scope="overview-v2">
+            <OverviewV2Page
+              nodes={displayNodes}
+              records={displayRecords}
+              theme={theme}
+              onTheme={handleThemeChange}
+              siteName={siteName}
+              lastUpdate={lastUpdate}
+              conn={conn}
+              ping={ping}
+              config={config}
+              hubTargetUuid={hubTargetUuid}
+              viewVersion={viewVersion}
+              onViewVersionChange={setViewVersion}
+            />
+          </ErrorBoundary>
+        )
+      }
+      return (
+        <OverviewPage
+          nodes={displayNodes}
+          records={displayRecords}
+          theme={theme}
+          onTheme={handleThemeChange}
+          siteName={siteName}
+          lastUpdate={lastUpdate}
+          conn={conn}
+          ping={ping}
+          history={globalHistory}
+          config={config}
+          hubTargetUuid={hubTargetUuid}
+          viewVersion={viewVersion}
+          onViewVersionChange={setViewVersion}
         />
       )
   }
 
-  // Fallback (e.g. hub with no target and no nodes): render Overview.
+  // Fallback (e.g. hub with no target and no nodes): render whichever overview the user picked.
+  if (viewVersion === 'v2') {
+    return (
+      <ErrorBoundary scope="overview-v2-fallback">
+        <OverviewV2Page
+          nodes={displayNodes}
+          records={displayRecords}
+          theme={theme}
+          onTheme={handleThemeChange}
+          siteName={siteName}
+          lastUpdate={lastUpdate}
+          conn={conn}
+          ping={ping}
+          config={config}
+          hubTargetUuid={hubTargetUuid}
+          viewVersion={viewVersion}
+          onViewVersionChange={setViewVersion}
+        />
+      </ErrorBoundary>
+    )
+  }
   return (
     <OverviewPage
       nodes={displayNodes}
@@ -287,6 +459,8 @@ export default function App() {
       history={globalHistory}
       config={config}
       hubTargetUuid={hubTargetUuid}
+      viewVersion={viewVersion}
+      onViewVersionChange={setViewVersion}
     />
   )
 }

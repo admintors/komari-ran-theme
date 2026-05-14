@@ -2,7 +2,7 @@
   "name": "Ran · 岚",
   "short": "ran",
   "description": "精密金工质感 · 双 hairline 倒角 · 凹陷读数窗 · 蚀刻铭牌字 · 多主题(墨石深 / 雾色浅 / 烬枣红 / 樱粉浅 / 薰衣草浅)。Inspired by precision-machined hi-fi gear.",
-  "version": "1.1.2",
+  "version": "2.0.0",
   "author": "Miuler",
   "url": "https://github.com/saladinxp/komari-ran-theme",
   "preview": "preview.png",
@@ -13,6 +13,14 @@
       {
         "name": "◇ THEME // 主题",
         "type": "title"
+      },
+      {
+        "key": "default_view",
+        "name": "[ LAYOUT ] 默认页面版本",
+        "type": "select",
+        "options": "v2,v1",
+        "default": "v2",
+        "help": "首页 (Overview) 和节点页 (Nodes) 的默认布局版本。v2 = 信息盘式仪表盘 (默认,推荐,5 卡顶部 + 24h 大图 + 世界丢包地图);v1 = 经典节点卡片网格 (高密度,直接看每个节点详细指标)。用户在 Topbar 切换后浏览器记住偏好,下次访问保持。"
       },
       {
         "key": "default_theme",
@@ -66,7 +74,7 @@
         "key": "version_tag",
         "name": "[ SYS.VER ] 版本号",
         "type": "string",
-        "default": "v1.1.2",
+        "default": "v2.0.0",
         "help": "页脚显示的版本标识"
       },
       {

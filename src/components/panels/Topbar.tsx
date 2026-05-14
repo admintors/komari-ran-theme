@@ -3,6 +3,7 @@ import { Etch } from '@/components/atoms/Etch'
 import { SerialPlate } from '@/components/atoms/SerialPlate'
 import { StatusDot } from '@/components/atoms/StatusDot'
 import { ThemePicker } from '@/components/atoms/ThemePicker'
+import { ViewVersionSwitcher } from '@/components/atoms/ViewVersionSwitcher'
 import { Icon } from '@/components/atoms/icons'
 import { useIsMobile, useIsNarrow } from '@/hooks/useMediaQuery'
 import { useSearchQuery, nodeMatchesQuery } from '@/hooks/useSearchQuery'
@@ -35,6 +36,13 @@ interface Props {
    */
   nodes?: KomariNode[]
   records?: Record<string, KomariRecord>
+  /**
+   * View version switcher (v1/v2). When both provided the segmented
+   * [v1 | v2] toggle renders left of the ThemePicker. Pages that don't
+   * make sense to version-switch (hub, traffic, billing) just omit these.
+   */
+  viewVersion?: 'v1' | 'v2'
+  onViewVersionChange?: (v: 'v1' | 'v2') => void
 }
 
 const MAX_SUGGESTIONS = 8
@@ -68,6 +76,8 @@ export function Topbar({
   onMobileMenu,
   nodes,
   records,
+  viewVersion,
+  onViewVersionChange,
 }: Props) {
   const isMobile = useIsMobile()
   const isNarrow = useIsNarrow()
@@ -430,6 +440,12 @@ export function Topbar({
           )
         )}
 
+        {viewVersion && onViewVersionChange && !isNarrow && (
+          <ViewVersionSwitcher
+            value={viewVersion}
+            onChange={onViewVersionChange}
+          />
+        )}
         <ThemePicker value={theme} onChange={(v) => onTheme(v)} />
       </div>
 

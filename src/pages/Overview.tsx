@@ -41,6 +41,8 @@ interface Props {
   history?: GlobalHistoryState
   config?: KomariPublicConfig
   hubTargetUuid?: string
+  viewVersion?: 'v1' | 'v2'
+  onViewVersionChange?: (v: 'v1' | 'v2') => void
 }
 
 export function OverviewPage({
@@ -55,6 +57,8 @@ export function OverviewPage({
   history,
   config,
   hubTargetUuid,
+  viewVersion,
+  onViewVersionChange,
 }: Props) {
   const drawer = useMobileDrawer()
   const [view, setView] = useState<ViewMode>('grid')
@@ -314,6 +318,8 @@ export function OverviewPage({
                   onMobileMenu={drawer.onOpen}
                   nodes={nodes}
                   records={records}
+                  viewVersion={viewVersion}
+                  onViewVersionChange={onViewVersionChange}
         />
 
         <main className="app-main" style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 16 }}>
