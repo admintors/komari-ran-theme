@@ -14,6 +14,7 @@
  * "collecting" placeholder.
  */
 
+import { useLayoutEffect, useRef, useState } from 'react'
 import type { TrendPoint } from '@/hooks/v2'
 import { Etch } from '@/components/atoms/Etch'
 import { SerialPlate } from '@/components/atoms/SerialPlate'
@@ -42,7 +43,30 @@ export function HealthTrend7DChart({
   days = 7,
 }: Props) {
   const isMobile = useIsMobile()
-  const w = 700
+
+  // Measure container width so the SVG viewBox matches real pixel width.
+  // The previous fixed viewBox (w=700) + preserveAspectRatio="none" caused
+  // text labels (axis ticks, "0/25/50/75/100" rail) to be horizontally
+  // squashed by 2-3x on the small dashboard card, rendering them as
+  // unreadable vertical streaks. With a 1:1 viewBox-to-pixel mapping and
+  // default aspect ratio, text glyphs render at their natural width.
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const [w, setW] = useState(700)
+  useLayoutEffect(() => {
+    if (!wrapperRef.current) return
+    const el = wrapperRef.current
+    // Synchronous initial measure before first paint, prevents a flash of
+    // mis-scaled labels on the first frame.
+    const initial = el.getBoundingClientRect().width
+    if (initial > 0) setW(initial)
+    const ro = new ResizeObserver((entries) => {
+      const width = entries[0]?.contentRect.width
+      if (width && width > 0) setW(width)
+    })
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+
   const h = isMobile ? 110 : 140
   const pad = { l: 28, r: 14, t: 10, b: 22 }
 
@@ -99,10 +123,9 @@ export function HealthTrend7DChart({
           flexDirection: isMobile ? 'column' : 'row',
         }}
       >
-        <div style={{ flex: 1, minWidth: 0 }}>
+        <div ref={wrapperRef} style={{ flex: 1, minWidth: 0 }}>
           <svg
             viewBox={`0 0 ${w} ${h}`}
-            preserveAspectRatio="none"
             style={{ width: '100%', height: h, display: 'block' }}
           >
             {/* Horizontal grid lines at 0/25/50/75/100 */}
