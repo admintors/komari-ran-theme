@@ -124,7 +124,27 @@ export function OverviewV2Page({
   const isMobile = useIsMobile()
 
   const uuids = useMemo(() => nodes.map((n) => n.uuid), [nodes])
+
+  // Always pull last-24h for the summary cards' sparklines.
   const history24 = useGlobalHistory(uuids, 24, 60_000)
+
+  // Time window for the GLOBAL THROUGHPUT chart. 24h is the default; we
+  // expose 1d / 3d / 7d / 30d to let the user zoom out for trend spotting.
+  // The choice is local to this session (not persisted) — users usually
+  // want a fresh "last 24h" view on each visit.
+  //
+  // When the chart's window is 24h, we reuse history24 instead of issuing
+  // a second identical pull. When the user picks a longer window we issue
+  // a parallel hook call for that range — it's a bigger fetch (more nodes
+  // × more buckets) so we do it on demand only.
+  const [chartHours, setChartHours] = useState(24)
+  const extendedHistory = useGlobalHistory(
+    uuids,
+    chartHours,
+    60_000,
+    chartHours !== 24, // gate: only fetch when actually zoomed out
+  )
+  const historyChart = chartHours === 24 ? history24 : extendedHistory
 
   // ── Real 24h histories (replaces previous placeholder/synthetic data) ──
 
@@ -272,13 +292,23 @@ export function OverviewV2Page({
             <ExpiringSoonCard stats={stats} withinDays={30} />
           </div>
 
-          {/* ── 3. Global Throughput 24h ── */}
+          {/* ── 3. Global Throughput — user-selectable time window ── */}
           <GlobalThroughput24hChart
-            netIn={history24.aggregate.netIn}
-            netOut={history24.aggregate.netOut}
+            netIn={historyChart.aggregate.netIn}
+            netOut={historyChart.aggregate.netOut}
             totalIn={stats.totalNetDown}
             totalOut={stats.totalNetUp}
-            windowLabel="Last 24h"
+            windowLabel={
+              chartHours === 24
+                ? 'Last 24h'
+                : chartHours < 168
+                  ? `Last ${chartHours / 24}d`
+                  : chartHours === 168
+                    ? 'Last 7d'
+                    : 'Last 30d'
+            }
+            timeWindow={chartHours}
+            onTimeWindowChange={setChartHours}
           />
 
           {/* ── 4. Mid row — 4 panels ── */}

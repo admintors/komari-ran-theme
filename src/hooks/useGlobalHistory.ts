@@ -99,6 +99,12 @@ export function useGlobalHistory(
   uuids: string[],
   hours = 1,
   refreshMs = 60_000,
+  /**
+   * When false, the hook is paused — it doesn't fetch and returns an
+   * empty state. Lets callers conditionally fire a hook based on UI
+   * state (e.g. only pull 30d data when the user actually zooms to 30d).
+   */
+  enabled = true,
 ): GlobalHistoryState {
   const [state, setState] = useState<GlobalHistoryState>({
     byNode: {},
@@ -113,6 +119,17 @@ export function useGlobalHistory(
   const key = [...uuids].sort().join(',') + `|h=${hours}`
 
   useEffect(() => {
+    if (!enabled) {
+      setState({
+        byNode: {},
+        pingByNode: {},
+        pingStatsByNode: {},
+        aggregate: emptyAggregate(),
+        ping: EMPTY_PING,
+        loading: false,
+      })
+      return
+    }
     if (uuids.length === 0) {
       setState({
         byNode: {},
@@ -262,7 +279,7 @@ export function useGlobalHistory(
       clearInterval(t)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [key, refreshMs])
+  }, [key, refreshMs, enabled])
 
   return state
 }

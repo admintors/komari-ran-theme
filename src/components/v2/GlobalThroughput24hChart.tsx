@@ -17,6 +17,7 @@
 import { useState } from 'react'
 import { Etch } from '@/components/atoms/Etch'
 import { SerialPlate } from '@/components/atoms/SerialPlate'
+import { TimeWindowSwitcher } from './TimeWindowSwitcher'
 import { contentFs } from '@/utils/fontScale'
 import { formatBytes, formatBps } from '@/utils/format'
 import { useIsMobile } from '@/hooks/useMediaQuery'
@@ -34,6 +35,14 @@ interface Props {
   windowLabel?: string
   title?: string
   serial?: string
+  /**
+   * Optional time-window switcher. When provided, a [24H | 3D | 7D | 30D]
+   * segmented control renders next to the chart title and clicking it
+   * calls onTimeWindowChange. Without these, the chart is fixed at
+   * whatever data the parent passes.
+   */
+  timeWindow?: number
+  onTimeWindowChange?: (hours: number) => void
 }
 
 function buildAreaPath(
@@ -88,6 +97,8 @@ export function GlobalThroughput24hChart({
   windowLabel = 'Last 24h',
   title = 'GLOBAL THROUGHPUT',
   serial = 'T01',
+  timeWindow,
+  onTimeWindowChange,
 }: Props) {
   const [view, setView] = useState<ThroughputView>('both')
   const isMobile = useIsMobile()
@@ -137,37 +148,45 @@ export function GlobalThroughput24hChart({
             {windowLabel}
           </span>
         </div>
-        <div
-          style={{
-            display: 'inline-flex',
-            background: 'var(--bg-inset)',
-            border: '1px solid var(--edge-engrave)',
-            borderRadius: 4,
-            padding: 2,
-            boxShadow: 'inset 0 1px 0 var(--edge-deep)',
-          }}
-        >
-          {(['in', 'out', 'both'] as ThroughputView[]).map((v) => (
-            <button
-              key={v}
-              type="button"
-              onClick={() => setView(v)}
-              style={{
-                padding: '3px 9px',
-                background: view === v ? 'var(--bg-2)' : 'transparent',
-                border: 'none',
-                borderRadius: 2,
-                fontFamily: 'var(--font-mono)',
-                fontSize: contentFs(9),
-                letterSpacing: '0.12em',
-                color: view === v ? 'var(--accent-bright)' : 'var(--fg-3)',
-                cursor: 'pointer',
-                fontWeight: view === v ? 500 : 400,
-              }}
-            >
-              {v.toUpperCase()}
-            </button>
-          ))}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          {timeWindow !== undefined && onTimeWindowChange && (
+            <TimeWindowSwitcher
+              value={timeWindow}
+              onChange={onTimeWindowChange}
+            />
+          )}
+          <div
+            style={{
+              display: 'inline-flex',
+              background: 'var(--bg-inset)',
+              border: '1px solid var(--edge-engrave)',
+              borderRadius: 4,
+              padding: 2,
+              boxShadow: 'inset 0 1px 0 var(--edge-deep)',
+            }}
+          >
+            {(['in', 'out', 'both'] as ThroughputView[]).map((v) => (
+              <button
+                key={v}
+                type="button"
+                onClick={() => setView(v)}
+                style={{
+                  padding: '3px 9px',
+                  background: view === v ? 'var(--bg-2)' : 'transparent',
+                  border: 'none',
+                  borderRadius: 2,
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: contentFs(9),
+                  letterSpacing: '0.12em',
+                  color: view === v ? 'var(--accent-bright)' : 'var(--fg-3)',
+                  cursor: 'pointer',
+                  fontWeight: view === v ? 500 : 400,
+                }}
+              >
+                {v.toUpperCase()}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -234,11 +253,21 @@ export function GlobalThroughput24hChart({
               </>
             )}
 
-            {/* X axis labels: -24h ... -18h ... -12h ... -6h ... 0 */}
+            {/* X axis labels — adapt to the current time window */}
             {[0, 0.25, 0.5, 0.75, 1].map((t) => {
               const x = pad.l + t * (w - pad.l - pad.r)
-              const hoursAgo = Math.round((1 - t) * 24)
-              const label = hoursAgo === 0 ? 'now' : `-${hoursAgo}h`
+              const windowHours = timeWindow ?? 24
+              const hoursAgo = (1 - t) * windowHours
+              let label: string
+              if (hoursAgo < 0.01) {
+                label = 'now'
+              } else if (windowHours <= 24) {
+                label = `-${Math.round(hoursAgo)}h`
+              } else if (windowHours <= 168) {
+                label = `-${(hoursAgo / 24).toFixed(0)}d`
+              } else {
+                label = `-${(hoursAgo / 24).toFixed(0)}d`
+              }
               return (
                 <text
                   key={t}

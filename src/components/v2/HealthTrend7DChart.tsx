@@ -132,7 +132,7 @@ export function HealthTrend7DChart({
               </g>
             ))}
 
-            {visible.length >= 2 ? (
+            {visible.length >= 3 ? (
               <>
                 <polyline
                   points={polylinePts}
@@ -151,28 +151,47 @@ export function HealthTrend7DChart({
                   />
                 ))}
               </>
-            ) : visible.length === 1 ? (
-              <circle
-                cx={xFor(visible[0].t)}
-                cy={yFor(visible[0].score)}
-                r="3"
-                fill="var(--signal-good)"
-              />
             ) : (
-              <text
-                x={w / 2}
-                y={h / 2}
-                textAnchor="middle"
-                fontFamily="var(--font-mono)"
-                fontSize="11"
-                fill="var(--fg-3)"
-                letterSpacing="0.12em"
-              >
-                collecting trend data…
-              </text>
+              // Fewer than 3 points → show a quiet "sampling…" caption
+              // centered on the plot area, with a small dot to suggest
+              // data is being captured. Avoid drawing a misleading
+              // single line / orphan dot.
+              <>
+                <circle
+                  cx={w / 2}
+                  cy={h / 2 - 4}
+                  r="3"
+                  fill="var(--fg-3)"
+                  opacity="0.45"
+                />
+                <text
+                  x={w / 2}
+                  y={h / 2 + 14}
+                  textAnchor="middle"
+                  fontFamily="var(--font-mono)"
+                  fontSize="10"
+                  fill="var(--fg-3)"
+                  letterSpacing="0.12em"
+                  opacity="0.75"
+                >
+                  sampling 7-day trend…
+                </text>
+                <text
+                  x={w / 2}
+                  y={h / 2 + 28}
+                  textAnchor="middle"
+                  fontFamily="var(--font-mono)"
+                  fontSize="8.5"
+                  fill="var(--fg-3)"
+                  letterSpacing="0.06em"
+                  opacity="0.55"
+                >
+                  {visible.length}/3 data points captured
+                </text>
+              </>
             )}
 
-            {/* X axis day ticks */}
+            {/* X axis day ticks — dimmed when no real trend yet */}
             {dayTicks.map((tick, i) => (
               <text
                 key={i}
@@ -183,6 +202,7 @@ export function HealthTrend7DChart({
                 fontSize="9"
                 fill="var(--fg-3)"
                 letterSpacing="0.06em"
+                opacity={visible.length >= 3 ? 1 : 0.35}
               >
                 {tick.label}
               </text>
@@ -228,7 +248,7 @@ export function HealthTrend7DChart({
               </span>
             </div>
           )}
-          {typeof delta === 'number' && (
+          {typeof delta === 'number' && visible.length >= 3 ? (
             <div
               style={{
                 fontFamily: 'var(--font-mono)',
@@ -242,6 +262,18 @@ export function HealthTrend7DChart({
                 {delta > 0 ? '↑' : delta < 0 ? '↓' : '·'} {Math.abs(delta)} pts
               </span>{' '}
               <span style={{ color: 'var(--fg-3)' }}>vs {days}d ago</span>
+            </div>
+          ) : (
+            <div
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: contentFs(10),
+                color: 'var(--fg-3)',
+                letterSpacing: '0.06em',
+                opacity: 0.7,
+              }}
+            >
+              sampling…
             </div>
           )}
         </div>
