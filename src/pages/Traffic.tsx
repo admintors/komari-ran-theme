@@ -357,7 +357,7 @@ export function TrafficPage({
                     { value: 'total', label: 'TOTAL' },
                     { value: 'tx', label: '↑ TX' },
                     { value: 'rx', label: '↓ RX' },
-                    { value: 'live', label: 'LIVE' },
+                    { value: 'live', label: '实时' },
                   ]}
                 />
               </div>
@@ -398,11 +398,11 @@ export function TrafficPage({
                   }}
                 >
                   <span className="traffic-col-rank">#</span>
-                  <span>NODE</span>
-                  <span className="traffic-col-region">REGION</span>
+                  <span>节点</span>
+                  <span className="traffic-col-region">地区</span>
                   <span style={{ textAlign: 'right' }}>↑ TX</span>
                   <span style={{ textAlign: 'right' }}>↓ RX</span>
-                  <span className="traffic-col-share">SHARE</span>
+                  <span className="traffic-col-share">占比</span>
                 </div>
                 {topTalkers.map((t, i) => (
                   <a
