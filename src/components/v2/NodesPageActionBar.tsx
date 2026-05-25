@@ -163,13 +163,13 @@ export function NodesPageActionBar({
     const date = `${ts.getFullYear()}${String(ts.getMonth() + 1).padStart(2, '0')}${String(ts.getDate()).padStart(2, '0')}-${String(ts.getHours()).padStart(2, '0')}${String(ts.getMinutes()).padStart(2, '0')}`
     const csv = nodesToCSV(visibleNodes, records)
     downloadCSV(`ran-nodes-${date}.csv`, csv)
-    setToast(`Exported ${visibleNodes.length} nodes`)
+    setToast(`已导出 ${visibleNodes.length} 个节点`)
   }
 
   const handleRefresh = () => {
     setSpinning(true)
     onRefresh?.()
-    setToast('Refreshed')
+    setToast('已刷新')
     setTimeout(() => setSpinning(false), 600)
   }
 
@@ -177,7 +177,7 @@ export function NodesPageActionBar({
     navigator.clipboard.writeText(
       visibleNodes.map((n) => n.name ?? n.uuid).join('\n'),
     )
-    setToast(`Copied ${visibleNodes.length} names`)
+    setToast(`已复制 ${visibleNodes.length} 个节点名称`)
     setBulkOpen(false)
   }
 
@@ -186,7 +186,7 @@ export function NodesPageActionBar({
       .map((n) => (n as { ip?: string }).ip)
       .filter(Boolean) as string[]
     navigator.clipboard.writeText(ips.join('\n'))
-    setToast(`Copied ${ips.length} IPs`)
+    setToast(`已复制 ${ips.length} 个 IP`)
     setBulkOpen(false)
   }
 
@@ -200,14 +200,14 @@ export function NodesPageActionBar({
     >
       <button type="button" onClick={handleExport} style={btnBase()}>
         <span>⬇</span>
-        <span>EXPORT</span>
+        <span>导出</span>
       </button>
 
       <button
         type="button"
         onClick={handleRefresh}
         style={btnBase()}
-        title="Refresh data"
+        title="刷新数据"
       >
         <span
           style={{
@@ -218,7 +218,7 @@ export function NodesPageActionBar({
         >
           ↻
         </span>
-        <span>REFRESH</span>
+        <span>刷新</span>
       </button>
 
       <div ref={bulkRef} style={{ position: 'relative' }}>
@@ -228,7 +228,7 @@ export function NodesPageActionBar({
           style={btnBase()}
         >
           <span>☰</span>
-          <span>BULK</span>
+          <span>批量操作</span>
           <span style={{ fontSize: contentFs(8), opacity: 0.6, marginLeft: 2 }}>
             ▼
           </span>
@@ -249,21 +249,21 @@ export function NodesPageActionBar({
               padding: 3,
             }}
           >
-            <BulkItem onClick={copyNames}>Copy node names</BulkItem>
-            <BulkItem onClick={copyIPs}>Copy node IPs</BulkItem>
+            <BulkItem onClick={copyNames}>复制节点名称</BulkItem>
+            <BulkItem onClick={copyIPs}>复制节点 IP</BulkItem>
             <BulkItem
               disabled
-              tooltip="Komari has no front-end edit API"
+              tooltip="Komari 前端没有可用的编辑 API"
               onClick={() => {}}
             >
-              Restart selected…
+              重启所选节点…
             </BulkItem>
             <BulkItem
               disabled
-              tooltip="Komari has no front-end edit API"
+              tooltip="Komari 前端没有可用的编辑 API"
               onClick={() => {}}
             >
-              Update tags…
+              更新标签…
             </BulkItem>
           </div>
         )}
