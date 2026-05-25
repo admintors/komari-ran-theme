@@ -358,7 +358,7 @@ export function NodeCardCompactV2({
       >
         <InlineProgress label="CPU" pct={record?.cpu} />
         <InlineProgress label="RAM" pct={memPct} />
-        <InlineProgress label="DISK" pct={diskPct} />
+        <InlineProgress label="磁盘" pct={diskPct} />
       </div>
 
       {/* Network row */}
@@ -414,13 +414,13 @@ export function NodeCardCompactV2({
         }}
       >
         <span style={{ color: 'var(--fg-3)' }}>
-          <Etch>UPTIME</Etch>{' '}
+          <Etch>运行时间</Etch>{' '}
           <span style={{ color: 'var(--fg-1)' }}>
             {fmtUptime(record?.uptime)}
           </span>
         </span>
         <span>
-          <Etch>EXPIRE</Etch>{' '}
+          <Etch>到期</Etch>{' '}
           <span style={{ color: expiry.color, fontWeight: 500 }}>
             {expiry.date}
           </span>{' '}
