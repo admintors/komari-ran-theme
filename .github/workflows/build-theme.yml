@@ -1,0 +1,38 @@
+name: Build Komari Theme
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build theme
+        run: npm run build
+
+      - name: Package zip
+        run: |
+          zip -rq komari-ran-zh.zip komari-theme.json preview.png dist/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: komari-ran-zh
+          path: komari-ran-zh.zip
