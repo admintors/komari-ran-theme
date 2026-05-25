@@ -115,7 +115,7 @@ export function NodeSwitcher({
           if (!open) e.currentTarget.style.background = 'transparent'
         }}
       >
-        <span>{current.name ?? 'Unnamed'}</span>
+        <span>{current.name ?? '未命名节点'}</span>
         <span
           aria-hidden
           style={{
@@ -163,7 +163,7 @@ export function NodeSwitcher({
               ref={inputRef}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="搜索节点 / region / group"
+              placeholder="搜索节点 / 地区 / 分组"
               style={{
                 width: '100%',
                 padding: '6px 10px',
@@ -273,7 +273,7 @@ export function NodeSwitcher({
                           letterSpacing: '0.18em',
                         }}
                       >
-                        ACTIVE
+                        当前
                       </span>
                     )}
                   </a>
@@ -293,9 +293,9 @@ export function NodeSwitcher({
             }}
           >
             <Etch>
-              {filtered.length} / {nodes.length} NODES
+              {filtered.length} / {nodes.length} 个节点
             </Etch>
-            <Etch>ESC TO CLOSE</Etch>
+            <Etch>按 ESC 关闭</Etch>
           </div>
         </div>
       )}
