@@ -806,7 +806,7 @@ export function NodeDetailPage({
                   </div>
                 </CardFrame>
 
-                <CardFrame title="Traffic" code="T · 11" action={<Etch>SINCE BOOT</Etch>}>
+                <CardFrame title="流量" code="T · 11" action={<Etch>自启动以来</Etch>}>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                     <ConnRow
                       label="↑ TX"
@@ -836,7 +836,7 @@ export function NodeDetailPage({
                   </div>
                 </CardFrame>
 
-                <CardFrame title="Latency" code="L · 11">
+                <CardFrame title="延迟" code="L · 11">
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                     {(() => {
                       // Komari WS frame doesn't carry ping/loss — fall back to
@@ -857,11 +857,11 @@ export function NodeDetailPage({
                       return (
                         <>
                           <ConnRow
-                            label="LATENCY"
+                            label="延迟"
                             value={online && latency != null ? `${Math.round(latency)} ms` : '—'}
                           />
                           <div style={{ borderTop: '1px solid var(--edge-engrave)' }} />
-                          <ConnRow label="PACKET LOSS" value={formatPercent(loss, 1)} />
+                          <ConnRow label="丢包率" value={formatPercent(loss, 1)} />
                         </>
                       )
                     })()}
@@ -873,7 +873,7 @@ export function NodeDetailPage({
                         alignItems: 'baseline',
                       }}
                     >
-                      <Etch>UPTIME</Etch>
+                      <Etch>运行时间</Etch>
                       <Numeric
                         value={online ? formatUptime(record?.uptime) : '—'}
                         size={14}
@@ -908,13 +908,13 @@ export function NodeDetailPage({
                   </h3>
                   <SerialPlate>
                     {pingTargets.length > 0
-                      ? `${pingTargets.length} TARGET${pingTargets.length === 1 ? '' : 'S'}`
+                      ? `${pingTargets.length} 个目标`
                       : history.loading
-                        ? 'LOADING'
-                        : 'NO TARGETS'}
+                        ? '加载中'
+                        : '无目标'}
                   </SerialPlate>
                 </div>
-                <Etch>SAMPLED FROM THIS PROBE</Etch>
+                <Etch>采样自当前探针</Etch>
               </div>
 
               {pingTargets.length === 0 ? (
