@@ -409,7 +409,7 @@ export function NodeDetailDrawer({ node, record, onClose }: Props) {
                     fontSize: contentFs(11),
                   }}
                 >
-                  <Etch>GROUP</Etch>
+                  <Etch>分组</Etch>
                   <span style={{ color: 'var(--fg-1)' }}>{node.group}</span>
                 </div>
               )}
@@ -423,7 +423,7 @@ export function NodeDetailDrawer({ node, record, onClose }: Props) {
                     fontSize: contentFs(11),
                   }}
                 >
-                  <Etch>REGION</Etch>
+                  <Etch>地区</Etch>
                   <span style={{ color: 'var(--fg-1)' }}>{node.region}</span>
                 </div>
               )}
@@ -438,7 +438,7 @@ export function NodeDetailDrawer({ node, record, onClose }: Props) {
               detail={node.cpu_name ?? undefined}
             />
             <ProgressRow
-              label="MEMORY"
+              label="内存"
               pct={memPct}
               detail={
                 record?.memory_used !== undefined && record?.memory_total
@@ -447,7 +447,7 @@ export function NodeDetailDrawer({ node, record, onClose }: Props) {
               }
             />
             <ProgressRow
-              label="DISK"
+              label="磁盘"
               pct={diskPct}
               detail={
                 record?.disk_used !== undefined && record?.disk_total
@@ -459,7 +459,7 @@ export function NodeDetailDrawer({ node, record, onClose }: Props) {
 
           {/* Network */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-            <Etch>NETWORK</Etch>
+            <Etch>网络</Etch>
             <div
               style={{
                 display: 'grid',
@@ -543,7 +543,7 @@ export function NodeDetailDrawer({ node, record, onClose }: Props) {
             }}
           >
             <div>
-              <Etch>LATENCY</Etch>
+              <Etch>延迟</Etch>
               <div
                 style={{
                   fontSize: contentFs(13),
@@ -563,7 +563,7 @@ export function NodeDetailDrawer({ node, record, onClose }: Props) {
               </div>
             </div>
             <div>
-              <Etch>PACKET LOSS</Etch>
+              <Etch>丢包率</Etch>
               <div
                 style={{
                   fontSize: contentFs(13),
@@ -594,7 +594,7 @@ export function NodeDetailDrawer({ node, record, onClose }: Props) {
             }}
           >
             <div>
-              <Etch>UPTIME</Etch>
+              <Etch>运行时间</Etch>
               <div
                 style={{
                   fontSize: contentFs(12),
@@ -607,7 +607,7 @@ export function NodeDetailDrawer({ node, record, onClose }: Props) {
               </div>
             </div>
             <div>
-              <Etch>EXPIRES</Etch>
+              <Etch>到期时间</Etch>
               <div
                 style={{
                   fontSize: contentFs(12),
@@ -655,7 +655,7 @@ export function NodeDetailDrawer({ node, record, onClose }: Props) {
               fontWeight: 600,
             }}
           >
-            VIEW DETAILS →
+            查看详情 →
           </button>
           <a
             href={`./index.html${hashFor({ name: 'nodes', uuid: node.uuid })}`}
@@ -673,7 +673,7 @@ export function NodeDetailDrawer({ node, record, onClose }: Props) {
               alignItems: 'center',
             }}
           >
-            FULL PAGE
+            完整页面
           </a>
         </footer>
       </aside>
