@@ -534,7 +534,7 @@ export function BillingPage({
           </div>
 
           {/* Detailed table */}
-          <CardFrame title="Subscriptions · Detailed" code="B · 11" inset>
+          <CardFrame title="订阅 · 明细" code="B · 11" inset>
             <div style={{ overflow: 'auto' }}>
               <div
                 style={{
@@ -549,13 +549,13 @@ export function BillingPage({
                 }}
               >
                 <span></span>
-                <Etch>HOST</Etch>
-                <Etch>REGION</Etch>
-                <Etch>PROVIDER</Etch>
-                <Etch style={{ textAlign: 'right' }}>PRICE/MO</Etch>
-                <Etch style={{ textAlign: 'right' }}>YEARLY</Etch>
-                <Etch style={{ textAlign: 'center' }}>EXPIRES</Etch>
-                <Etch style={{ textAlign: 'right' }}>DAYS LEFT</Etch>
+                <Etch>主机</Etch>
+                <Etch>地区</Etch>
+                <Etch>服务商</Etch>
+                <Etch style={{ textAlign: 'right' }}>月付价格</Etch>
+                <Etch style={{ textAlign: 'right' }}>年付估算</Etch>
+                <Etch style={{ textAlign: 'center' }}>到期时间</Etch>
+                <Etch style={{ textAlign: 'right' }}>剩余天数</Etch>
               </div>
               {byExpiry.map((r) => {
                 const dl = r.parsed.daysLeft
