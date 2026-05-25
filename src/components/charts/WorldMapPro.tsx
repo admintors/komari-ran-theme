@@ -481,31 +481,31 @@ export function WorldMapPro({
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 2, color: 'var(--fg-2)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12 }}>
-              <span style={{ color: 'var(--fg-3)' }}>REGION</span>
+              <span style={{ color: 'var(--fg-3)' }}>地区</span>
               <span>
                 {hovered.region ?? '—'} · {regionToISO(hovered.region) ?? '—'}
               </span>
             </div>
             {hovered.city && (
               <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12 }}>
-                <span style={{ color: 'var(--fg-3)' }}>CITY</span>
+                <span style={{ color: 'var(--fg-3)' }}>城市</span>
                 <span>{hovered.city}</span>
               </div>
             )}
             <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12 }}>
-              <span style={{ color: 'var(--fg-3)' }}>LAT/LON</span>
+              <span style={{ color: 'var(--fg-3)' }}>经纬度</span>
               <span>
                 {hovered.lat.toFixed(2)}, {hovered.lon.toFixed(2)}
               </span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12 }}>
-              <span style={{ color: 'var(--fg-3)' }}>STATUS</span>
+              <span style={{ color: 'var(--fg-3)' }}>状态</span>
               <span
                 style={{
                   color: hovered.online ? 'var(--signal-good)' : 'var(--signal-bad)',
                 }}
               >
-                {hovered.online ? 'ONLINE' : 'OFFLINE'}
+                {hovered.online ? '在线' : '离线'}
               </span>
             </div>
           </div>
@@ -520,7 +520,7 @@ export function WorldMapPro({
                 letterSpacing: '0.18em',
               }}
             >
-              ACTIVE PROBE
+              当前探针
             </div>
           )}
         </div>
@@ -563,7 +563,7 @@ export function WorldMapPro({
             zIndex: 2,
           }}
         >
-          <Etch>POINTER · LON {pointerLonLat[0].toFixed(2)} · LAT {pointerLonLat[1].toFixed(2)}</Etch>
+          <Etch>指针 · 经度 {pointerLonLat[0].toFixed(2)} · 纬度 {pointerLonLat[1].toFixed(2)}</Etch>
         </div>
       )}
 
@@ -581,7 +581,7 @@ export function WorldMapPro({
       >
         <ZoomBtn label="+" onClick={() => setZoomClamped(zoom * 1.4)} />
         <ZoomBtn label="−" onClick={() => setZoomClamped(zoom / 1.4)} />
-        <ZoomBtn label="↺" onClick={reset} title="reset (or double-click map)" />
+        <ZoomBtn label="↺" onClick={reset} title="重置（或双击地图）" />
       </div>
     </div>
   )
