@@ -117,11 +117,11 @@ export function NodeRowTable({
         >
           <thead>
             <tr>
-              <th style={{ ...headStyle, minWidth: 180 }}>NODE</th>
-              <th style={{ ...headStyle, width: 70 }}>STATUS</th>
+              <th style={{ ...headStyle, minWidth: 180 }}>节点</th>
+              <th style={{ ...headStyle, width: 70 }}>状态</th>
               <th style={{ ...headStyle, width: 60, textAlign: 'right' }}>CPU</th>
               <th style={{ ...headStyle, width: 60, textAlign: 'right' }}>RAM</th>
-              <th style={{ ...headStyle, width: 60, textAlign: 'right' }}>DISK</th>
+              <th style={{ ...headStyle, width: 60, textAlign: 'right' }}>磁盘</th>
               {!isMobile && (
                 <>
                   <th style={{ ...headStyle, width: 90, textAlign: 'right' }}>
@@ -134,15 +134,15 @@ export function NodeRowTable({
                     PING
                   </th>
                   <th style={{ ...headStyle, width: 60, textAlign: 'right' }}>
-                    LOSS
+                    丢包
                   </th>
                 </>
               )}
               <th style={{ ...headStyle, width: 70, textAlign: 'right' }}>
-                UPTIME
+                运行时间
               </th>
               <th style={{ ...headStyle, width: 110, textAlign: 'right' }}>
-                EXPIRES
+                到期时间
               </th>
             </tr>
           </thead>
@@ -158,7 +158,7 @@ export function NodeRowTable({
                     padding: '40px 10px',
                   }}
                 >
-                  No nodes match the current filters.
+                  当前筛选条件下没有匹配的节点。
                 </td>
               </tr>
             ) : (
