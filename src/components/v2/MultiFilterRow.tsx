@@ -152,7 +152,7 @@ export function MultiFilterRow({
           }}
         >
           <span>↻</span>
-          <span>REFRESH</span>
+          <span>刷新</span>
         </button>
       )}
     </div>
