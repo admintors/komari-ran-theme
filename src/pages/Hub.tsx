@@ -1239,46 +1239,46 @@ export function HubPage({
           >
             {/* ── COL 1: identity + system + allocation ── */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-              <CardFrame title="System Identity" code="SYS · 01">
+              <CardFrame title="系统信息" code="SYS · 01">
                 <div style={{ padding: '4px 12px 10px' }}>
-                  <InfoRow label="Host" value={node.name ?? '—'} />
+                  <InfoRow label="主机" value={node.name ?? '—'} />
                   <InfoRow label="IPv4" value={node.ip ?? '—'} />
-                  <InfoRow label="Region" value={node.region ?? '—'} />
+                  <InfoRow label="地区" value={node.region ?? '—'} />
                   <InfoRow label="OS" value={record?.os || node.os || '—'} />
                   <InfoRow label="CPU" value={record?.cpu_model || node.cpu_model || '—'} />
                   <InfoRow
-                    label="Cores"
-                    value={node.cpu_cores != null ? `${node.cpu_cores} threads` : '—'}
+                    label="核心数"
+                    value={node.cpu_cores != null ? `${node.cpu_cores} 线程` : '—'}
                   />
                   <InfoRow label="Arch" value={node.arch ?? '—'} />
                   <InfoRow
-                    label="Uptime"
+                    label="运行时间"
                     value={online && record?.uptime != null ? formatUptime(record.uptime) : '—'}
                   />
                 </div>
               </CardFrame>
 
-              <CardFrame title="Allocation" code="ALC · 02">
+              <CardFrame title="资源分配" code="ALC · 02">
                 <div style={{ padding: '4px 12px 10px' }}>
                   <AllocationBar
-                    label="Memory"
+                    label="内存"
                     used={record?.memory_used}
                     total={record?.memory_total}
                   />
                   <AllocationBar
-                    label="Disk"
+                    label="磁盘"
                     used={record?.disk_used}
                     total={record?.disk_total}
                   />
                   <AllocationBar
-                    label="Swap"
+                    label="交换区"
                     used={record?.swap_used}
                     total={record?.swap_total}
                   />
                 </div>
               </CardFrame>
 
-              <CardFrame title="Resources" code="RES · 03">
+              <CardFrame title="资源状态" code="RES · 03">
                 <div style={{ padding: '8px 12px 10px' }}>
                   <ResourceRow
                     label="CPU"
@@ -1299,7 +1299,7 @@ export function HubPage({
                     status={memPct > 85 ? 'bad' : memPct > 65 ? 'warn' : 'good'}
                   />
                   <ResourceRow
-                    label="DISK"
+                    label="磁盘"
                     value={online && record?.disk_total ? `${diskPct.toFixed(1)}%` : '—'}
                     pct={online ? diskPct : 0}
                     detail={
