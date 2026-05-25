@@ -16,12 +16,12 @@ interface NavItem {
 }
 
 const NAV_BASE: Omit<NavItem, 'enabled' | 'uuidLink'>[] = [
-  { id: 'overview', label: 'Overview', icon: Icon.server },
-  { id: 'nodes', label: 'Nodes', icon: Icon.cpu },
-  { id: 'hub', label: 'Hub', icon: Icon.hub },
-  { id: 'traffic', label: 'Traffic', icon: Icon.net },
-  { id: 'billing', label: 'Billing', icon: Icon.settings },
-  { id: 'map', label: 'Geo Map', icon: Icon.globe },
+  { id: 'overview', label: '总览', icon: Icon.server },
+  { id: 'nodes', label: '节点', icon: Icon.cpu },
+  { id: 'hub', label: '中枢', icon: Icon.hub },
+  { id: 'traffic', label: '流量', icon: Icon.net },
+  { id: 'billing', label: '账单', icon: Icon.settings },
+  { id: 'map', label: '地理地图', icon: Icon.globe },
 ]
 
 interface Props {
@@ -207,7 +207,7 @@ export function Sidebar({
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <span style={{ fontSize: 13, fontWeight: 600, letterSpacing: '-0.01em' }}>RAN</span>
-              <Etch size={8}>PROBE · {version}</Etch>
+              <Etch size={8}>探针 · {version}</Etch>
             </div>
           </a>
         </div>
@@ -351,7 +351,7 @@ export function Sidebar({
               >
                 ◇
               </span>
-              <span style={{ fontWeight: 600 }}>ADMIN · SIGN IN</span>
+              <span style={{ fontWeight: 600 }}>管理后台 · 登录</span>
             </span>
             <span
               style={{
@@ -366,7 +366,7 @@ export function Sidebar({
           </a>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-            <Etch>Region · Operator</Etch>
+            <Etch>地区 · 运维方</Etch>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <span style={{ fontSize: 11, color: 'var(--fg-1)' }}>{region}</span>
               <SerialPlate>OP-04A</SerialPlate>
