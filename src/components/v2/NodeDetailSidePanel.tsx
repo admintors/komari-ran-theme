@@ -371,7 +371,7 @@ export function NodeDetailSidePanel({ node, record, width = 300 }: Props) {
                   fontSize: contentFs(10),
                 }}
               >
-                <Etch>GROUP</Etch>
+                <Etch>分组</Etch>
                 <span style={{ color: 'var(--fg-1)' }}>{node.group}</span>
               </div>
             )}
@@ -385,7 +385,7 @@ export function NodeDetailSidePanel({ node, record, width = 300 }: Props) {
                   fontSize: contentFs(10),
                 }}
               >
-                <Etch>REGION</Etch>
+                <Etch>地区</Etch>
                 <span style={{ color: 'var(--fg-1)' }}>{node.region}</span>
               </div>
             )}
@@ -399,7 +399,7 @@ export function NodeDetailSidePanel({ node, record, width = 300 }: Props) {
             detail={node.cpu_name ?? undefined}
           />
           <ProgressRow
-            label="MEMORY"
+            label="内存"
             pct={memPct}
             detail={
               record?.memory_used !== undefined && record?.memory_total
@@ -408,7 +408,7 @@ export function NodeDetailSidePanel({ node, record, width = 300 }: Props) {
             }
           />
           <ProgressRow
-            label="DISK"
+            label="磁盘"
             pct={diskPct}
             detail={
               record?.disk_used !== undefined && record?.disk_total
@@ -467,7 +467,7 @@ export function NodeDetailSidePanel({ node, record, width = 300 }: Props) {
           }}
         >
           <div>
-            <Etch>UPTIME</Etch>
+            <Etch>运行时间</Etch>
             <div
               style={{
                 fontFamily: 'var(--font-mono)',
@@ -480,7 +480,7 @@ export function NodeDetailSidePanel({ node, record, width = 300 }: Props) {
             </div>
           </div>
           <div>
-            <Etch>EXPIRES</Etch>
+            <Etch>到期时间</Etch>
             <div
               style={{
                 fontFamily: 'var(--font-mono)',
@@ -525,7 +525,7 @@ export function NodeDetailSidePanel({ node, record, width = 300 }: Props) {
             fontWeight: 600,
           }}
         >
-          VIEW DETAILS →
+          查看详情 →
         </button>
         <a
           href={`./index.html${hashFor({ name: 'nodes', uuid: node.uuid })}`}
